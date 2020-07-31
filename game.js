@@ -40,7 +40,17 @@ function checkAnswer(currentLevel) {
             },1000);
         }
     } else {
-        console.log('failed');
+        console.log('wrong');
+        // play the wrong sound for wrong answer
+        playSound('wrong');
+        //change body color for wrong answer
+        $("body").addClass("game-over");
+        //remove it after 200 milliseconds
+        setTimeout(function() {
+            $("body").removeClass("game-over");
+        },200);
+        //change h1 also
+        $("#level-title").text("Game Over, Press Any Key to Restart");
     }
     
 }
