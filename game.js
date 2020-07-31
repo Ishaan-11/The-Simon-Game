@@ -10,6 +10,8 @@ $(".btn").on("click", function() {
     userClickedPattern.push(userChosenColour);
     // play the sound for the button colour selected
     playSound(userChosenColour);
+    //animate button on click
+    animatePress(userChosenColour)
 });
 
 //generate a new random number between 0 and 3,
@@ -22,7 +24,7 @@ function nextSequence() {
     gamePattern.push(randomChosenColour);
 
     //select the button with the same id as the randomChosenColour and animate a flash 
-    $("#"+randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
+    $("#" + randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
 
     // play the sound for the button colour selected
     playSound(randomChosenColour);
@@ -33,4 +35,13 @@ function nextSequence() {
 function playSound(name) {
     var audio = new Audio("sounds/" + name + ".mp3");
     audio.play();
+}
+
+// animate button on click
+function animatePress(currentColour) {
+    $("#"+currentColour).addClass("pressed");
+    // remove the pressed class after 100 milliseconds
+    setTimeout(function(){
+        $("#" + currentColour).removeClass("pressed");
+    },100);
 }
