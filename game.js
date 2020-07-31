@@ -2,6 +2,14 @@ var buttonColours = ["red", "blue", "green", "yellow"];
 
 var gamePattern = [];
 
+var userClickedPattern = [];
+
+//detect when any of the buttons are clicked
+$(".btn").on("click", function() {
+    var userChosenColour = $(this).attr("id");
+    userClickedPattern.push(userChosenColour);
+});
+
 //generate a new random number between 0 and 3,
 function nextSequence() {
     
