@@ -4,6 +4,11 @@ var gamePattern = [];
 
 var userClickedPattern = [];
 
+//to keep track of whether if the game has started or not
+var started = false;
+
+var level = 0;
+
 //detect when any of the buttons are clicked
 $(".btn").on("click", function() {
     var userChosenColour = $(this).attr("id");
@@ -14,8 +19,23 @@ $(".btn").on("click", function() {
     animatePress(userChosenColour)
 });
 
+// when a keyboard key has been pressed call nextSequence().
+$(document).on("keydown",function() {
+    if(!started) {
+        //when the game has started, change h1 to "Level 0"
+        $("#level-title").text("Level " + level);
+        nextSequence();
+        started = true;
+    }
+});
+
 //generate a new random number between 0 and 3,
 function nextSequence() {
+
+    //increase the level by 1 every time nextSequence() is called
+    level++;
+    //update the h1 with this change in the value of level
+    $("#level-title").text("Level " + level);
     
     var randomNumber = Math.floor(Math.random() * 4);
     //to select a random colour from the buttonColours array.
