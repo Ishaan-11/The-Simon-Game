@@ -6,6 +6,7 @@ var userClickedPattern = [];
 //to keep track of whether if the game has started or not
 var started = false;
 var level = 0;
+var bestScore = 0;
 
 // when a keyboard key has been pressed call nextSequence().
 $(document).on("keydown",function() {
@@ -32,9 +33,13 @@ $(".btn").on("click", function() {
 
 
 function checkAnswer(currentLevel) {
-    if(gamePattern[currentLevel] == userClickedPattern[currentLevel]) {
+    if(gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
         console.log('success');
-        if(userClickedPattern.length == gamePattern.length) {
+        if(userClickedPattern.length === gamePattern.length) {
+            if (bestScore < level) {
+                bestScore = level;
+                $("#best-score span").text(bestScore);
+            }
             setTimeout(function() {
                 nextSequence();
             },1000);
